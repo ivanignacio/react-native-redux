@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Application from './components/Application'
 import {Provider} from 'react-redux'
 import configureStore from './reducers/index'
@@ -8,7 +8,7 @@ import configureStore from './reducers/index'
 // npm install redux react-redux --save
 
 const store = configureStore()
-export default class App extends React.Component{
+export default class App extends Component{
   render(){
     return (
       <Provider store= {store}>

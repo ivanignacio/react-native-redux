@@ -7,7 +7,7 @@ import {addPlace} from '../actions/place_actions'
 
 class Application extends Component{    
     state = {
-        temporaryPlace: ''
+        temporaryPlace: ''    
     }
 
     handlePressEvent = () =>{
@@ -25,14 +25,18 @@ class Application extends Component{
             return {
                 temporaryPlace: text
             }
-        })                
+        })                 
+    }
+
+    checkAvailability = () => {
+        return !(this.state.temporaryPlace.length > 1)
     }
 
     render(){
         return(
             <View style={styles.container}>
                 <TextInput placeholder={"Enter a city here"} value={this.state.temporaryPlace} onChangeText={text => this.handleChangeText(text)} />
-                <Button title={"Add place"} onPress={this.handlePressEvent}/>
+                <Button title={"Add place"} onPress={this.handlePressEvent} disabled={this.checkAvailability()}/>
                 <View>
                     <Text>You have {this.props.places.length} place(s) in your state</Text>
                 </View>
@@ -57,9 +61,9 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
     return{
-        add: (name) =>{
+        add: (name) => {
             dispatch(addPlace(name))
         }
     }
@@ -70,5 +74,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Application)
 const styles = StyleSheet.create({
     container:{
         padding: 20,
+        paddingTop: 100
     }
 })
